@@ -3,7 +3,7 @@
 if arch in ['i386', 'armhf', 'arm64']:
     base_image = 'osrf/%s_%s:%s' % (os_name, arch, os_code_name)
 else:
-    base_image = '%s:%s' % (os_name, os_code_name)
+    base_image = 'lcr.loongnix.cn/library/debian'
 }@
 @(SNIPPET(
     'builder_shell',

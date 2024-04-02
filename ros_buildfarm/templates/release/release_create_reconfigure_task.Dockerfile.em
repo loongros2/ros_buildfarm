@@ -1,7 +1,7 @@
 # generated from @template_name
 
-@{os_code_name = 'focal'}@
-FROM ubuntu:@os_code_name
+@{os_code_name = 'trixie'}@
+FROM lcr.loongnix.cn/library/debian
 
 VOLUME ["/var/cache/apt/archives"]
 
@@ -21,7 +21,7 @@ ENV DEBIAN_FRONTEND noninteractive
     'snippet/add_distribution_repositories.Dockerfile.em',
     distribution_repository_keys=distribution_repository_keys,
     distribution_repository_urls=distribution_repository_urls,
-    os_name='ubuntu',
+    os_name='debian',
     os_code_name=os_code_name,
     add_source=False,
 ))@
@@ -36,7 +36,7 @@ RUN echo "@today_str"
 
 @(TEMPLATE(
     'snippet/install_python3.Dockerfile.em',
-    os_name='ubuntu',
+    os_name='debian',
     os_code_name=os_code_name,
 ))@
 

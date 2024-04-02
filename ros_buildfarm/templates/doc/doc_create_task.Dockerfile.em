@@ -1,6 +1,6 @@
 # generated from @template_name
 
-FROM ubuntu:@os_code_name
+FROM lcr.loongnix.cn/library/debian
 
 VOLUME ["/var/cache/apt/archives"]
 
