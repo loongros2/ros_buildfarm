@@ -528,7 +528,7 @@ def main(argv=sys.argv[1:]):
         if '3' == str(condition_context['ROS_PYTHON_VERSION']):
             # the following are required by rosdoc_lite
             debian_pkg_names.extend([
-                'python3-catkin-pkg-modules',
+                'python3-catkin-pkg',
                 'python3-kitchen',
                 'python3-rospkg-modules',
                 'python3-sphinx',

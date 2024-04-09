@@ -64,7 +64,7 @@ RUN echo "@today_str"
     os_code_name=os_code_name,
 ))@
 
-RUN python3 -u /tmp/wrapper_scripts/apt.py update-install-clean -q -y devscripts dpkg-dev python3-apt python3-catkin-pkg-modules python3-empy python3-rosdistro-modules python3-yaml
+RUN python3 -u /tmp/wrapper_scripts/apt.py update-install-clean -q -y devscripts dpkg-dev python3-apt python3-catkin-pkg python3-empy python3-rosdistro python3-yaml
 
 # Workaround for focal armhf certificate rehash issue
 RUN . /etc/os-release && test "$VERSION_ID" = "20.04" && test "$(uname -m)" = "armv7l" && c_rehash || true

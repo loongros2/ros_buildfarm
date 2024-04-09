@@ -49,7 +49,7 @@ RUN echo "@today_str"
     os_code_name=os_code_name,
 ))@
 
-RUN python3 -u /tmp/wrapper_scripts/apt.py update-install-clean -q -y -o Debug::pkgProblemResolver=yes build-essential python3-catkin-pkg-modules doxygen graphviz openssh-client python3 python3-yaml python3-pip rsync
+RUN python3 -u /tmp/wrapper_scripts/apt.py update-install-clean -q -y -o Debug::pkgProblemResolver=yes build-essential python3-catkin-pkg doxygen graphviz openssh-client python3 python3-yaml python3-pip rsync
 
 USER buildfarm
 ENTRYPOINT ["sh", "-c"]
