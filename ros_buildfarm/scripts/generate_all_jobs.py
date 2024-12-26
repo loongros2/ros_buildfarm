@@ -13,9 +13,9 @@
 # limitations under the License.
 
 import argparse
-import imp
 import os
 import sys
+from importlib.machinery import SourceFileLoader
 
 from ros_buildfarm.argument import add_argument_config_url
 from ros_buildfarm.config import get_ci_build_files
@@ -355,7 +355,7 @@ def _check_call(cmd):
     print('')
     basepath = os.path.dirname(__file__)
     cmd[0] = os.path.join(basepath, cmd[0])
-    module = imp.load_source('script', cmd[0])
+    module = SourceFileLoader('script', cmd[0]).load_module()
     rc = module.main(cmd[1:])
     if rc:
         sys.exit(rc)
