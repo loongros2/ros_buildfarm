@@ -25,21 +25,4 @@ for distribution, archive_type in product((os_code_name, os_code_name + '-update
 }@
 RUN @(' && '.join(commands))
 @[  end if]@
-@[else if os_name == 'debian']@
-# Add contrib and non-free to debian images
-# Using httpredir here to match mirror used in osrf image
-# (https://github.com/osrf/multiarch-docker-image-generation/blob/d251b9a/build-image.sh#L46)
-@{
-commands = []
-for component in ('contrib', 'non-free'):
-    entry = 'deb http://httpredir.debian.org/debian %s %s' % (os_code_name, component)
-    pattern = 'deb http://httpredir\.debian\.org/debian/? %s ([-a-z] )*%s( [-a-z])*' % (os_code_name, component)
-    commands.append('(grep -q -E -x -e "%s" /etc/apt/sources.list || echo "%s" >> /etc/apt/sources.list)' % (pattern, entry))
-}@
-RUN @(' && '.join(commands))
-# Make sure to install apt-transport-https since some CloudFront mirrors are currently being redirected to https
-RUN for i in 1 2 3; do apt-get update && apt-get install -q -y apt-transport-https && apt-get clean && break || if [ $i -lt 3 ]; then sleep 5; else false; fi; done
-# Hit cloudfront mirror because of corrupted packages on fastly mirrors (https://github.com/ros-infrastructure/ros_buildfarm/issues/455)
-# You can remove this line to target the default mirror or replace this to use the mirror of your preference
-RUN sed -i 's/httpredir\.debian\.org/cloudfront.debian.net/' /etc/apt/sources.list
 @[end if]@
