@@ -1,7 +1,7 @@
 # generated from @template_name
 
 @{task_os_code_name = 'trixie'}@
-FROM lcr.loongnix.cn/library/debian
+FROM z572/loongros2
 
 VOLUME ["/var/cache/apt/archives"]
 

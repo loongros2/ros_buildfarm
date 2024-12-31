@@ -1,6 +1,6 @@
 # generated from @template_name
 
-FROM lcr.loongnix.cn/library/debian
+FROM z572/loongros2
 
 VOLUME ["/var/cache/apt/archives"]
 
