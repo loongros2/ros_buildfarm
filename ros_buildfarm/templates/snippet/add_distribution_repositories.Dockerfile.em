@@ -12,7 +12,7 @@ ubuntu_before_bionic = (
 RUN for i in 1 2 3; do apt-get update && apt-get install -q -y gnupg ca-certificates && apt-get clean && break || if [ $i -lt 3 ]; then sleep 5; else false; fi; done
 @[end if]@
 @[for i, key in enumerate(distribution_repository_keys)]@
-RUN echo "@('\\n'.join(key.splitlines()))" > /tmp/keys/@(i).key@[if key] && apt-key add /tmp/keys/@(i).key@[end if]
+RUN echo "@('\\n'.join(key.splitlines()))" | tee /etc/apt/trusted.gpg.d/@(i).asc /tmp/keys/@(i).key
 @[end for]@
 @[for i, url in enumerate(distribution_repository_urls)]@
 RUN echo deb @[if not distribution_repository_keys[i]][trusted=yes] @[end if]@ @url @os_code_name main | tee -a /etc/apt/sources.list.d/buildfarm.list
